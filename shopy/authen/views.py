@@ -1,12 +1,15 @@
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth.models import User
+from django.views.generic import View
 from django.contrib import messages
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from .utils import TokenGenerator, generate_token 
-from django.utils.encoding import force_bytes,force_str
+from django.utils.encoding import force_str,force_bytes,DjangoUnicodeDecodeError
 from django.core.mail import EmailMessage
 from django.conf import settings
+from tokenize import generate_tokens
+from django.contrib.auth import authenticate, login ,logout
 
 # Create your views here.
 def signup(request):
@@ -21,8 +24,6 @@ def signup(request):
             if User.objects.get(username=email):
                 messages.warning(request, " Email is taken")
                 return render(request, 'signup.html')
-                 
-            #   return  HttpResponse("email already exist ")
         except Exception as identifiers:
             pass
         user = User.objects.create_user( email,email,password)
@@ -40,7 +41,9 @@ def signup(request):
 
         email_message = EmailMessage(email_subject,message,settings.EMAIL_HOST_USER,[email])
         email_message.send()
-        messages.success(request, "Activate your account by clicking on the link sent to your email") 
+        messages.success(request, "User created, Please verify your email !")
+        # email_message.send()
+        # messages.success(request, "Activate your account by clicking on the link sent to your email") 
         return redirect('/auth/login')
 
     return render(request, "signup.html")
@@ -57,13 +60,30 @@ class ActivateAccountView(View):
             user.is_active = True
             user.save()
             messages.info(request, "Account activated successfully")
-            return redirect('/authen/login')
+            return redirect('/auth/login')
         return redirect(request, 'auth/actiavtefail.html')
 
 def handlelogin(request):
-    return render(request, "login.html")
+    if request.method == "POST":
+        username = request.POST['email']
+        userpassword = request.POST['pass1']
+        myuser = authenticate(username=username,password=userpassword)
+        if myuser is not None:
+            login(request, myuser)
+            messages.success(request, "Successfully logged in")
+            return redirect(request, '/')
+        else:
+            messages.error(request, "Invalid credentials, Please try again")
+            return render(request, "/auth/login")
+
+    return render(request, "auth/login.html")
+    
+
+
+
 
 def handlelogout(request):
     return redirect('/auth/login')
     # return render(request, "authentication/signup.html")
 
+    
