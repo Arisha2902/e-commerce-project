@@ -48,9 +48,12 @@
           <li><a class="nav-link scrollto active" href="/" class="active">Home</a></li>
           <li><a class="nav-link scrollto " href="/blog">Blog</a></li>
           <li><a class="nav-link scrollto " href="/about">About</a></li>
-          <li><a class="nav-link scrollto " href="/about">Orders</a></li>
+          <li><a class="nav-link scrollto " href="/checkout"></a>Checkout</li>
           <li><a class="nav-link scrollto " href="/about">My Profile</a></li>
-          
+          <button type="button" class="btn btn-lg btn-danger p-3 m-2" id="popcart" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?" data-placement="bottom">
+            Cart (<span id="cart">0</span>)
+          </button>
+
           {% if request.user.is_authenticated %}
           <li><a class="nav-link scrollto" href="/auth/logout/"> Logout 
             <!-- {{ user.username }} -->
@@ -67,7 +70,8 @@
           </li>
           {% endif %}
 
-          <li><a class="nav-link scrollto bg-dark p-3 m-2" href="#contact">Cart</a></li>
+
+          <!-- <li><a class="nav-link scrollto bg-dark p-3 m-2" href="#contact">Cart</a></li> -->
           <li><a class="nav-link scrollto bg-success p-3 m-2 " href="#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -84,26 +88,23 @@
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
          {% block content %}
          
-
          {% endblock content %}
       </div>
-
     </section><!-- /Hero Section -->
+
     <main id="main">
-      {% block body %}
+    {% block body %}
       {% for message in messages %}
        <div class="alert alert-{{message.tags}}  alert-dismissible fade show" role="alert">
          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
          <strong></strong> {{message}}
        </div>
       {% endfor %}
-
-      {% endblock body %}
+    {% endblock body %}
     </main>
 
   
   <footer id="footer" class="footer dark-background">
-
     <div class="container footer-top">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-about">
@@ -156,19 +157,16 @@
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">Tempo</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
-      
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
-
   </footer>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
   <!-- Preloader -->
-  <div id="preloader"></div>
 
+  <div id="preloader"></div>
   <!-- Vendor JS Files -->
   <script src="{% static '/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   <script src="{% static '/assets/vendor/php-email-form/validate.js' %}"></script>
