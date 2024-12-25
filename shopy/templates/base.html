@@ -50,6 +50,13 @@
           <li><a class="nav-link scrollto " href="/about">About</a></li>
           <li><a class="nav-link scrollto " href="/about">Orders</a></li>
           <li><a class="nav-link scrollto " href="/about">My Profile</a></li>
+          
+          {% if request.user.is_authenticated %}
+          <li><a class="nav-link scrollto" href="/auth/logout/"> Logout 
+            <!-- {{ user.username }} -->
+          </a></li>
+          {% else %}
+                 
           <li class="dropdown"><a href="#"><span>Sigin</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="/auth/signup/"> Sign Up</a></li>
@@ -58,6 +65,8 @@
              
             </ul>
           </li>
+          {% endif %}
+
           <li><a class="nav-link scrollto bg-dark p-3 m-2" href="#contact">Cart</a></li>
           <li><a class="nav-link scrollto bg-success p-3 m-2 " href="#contact">Contact</a></li>
         </ul>
@@ -75,13 +84,19 @@
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
          {% block content %}
          
+
          {% endblock content %}
       </div>
 
     </section><!-- /Hero Section -->
     <main id="main">
       {% block body %}
-
+      {% for message in messages %}
+       <div class="alert alert-{{message.tags}}  alert-dismissible fade show" role="alert">
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+         <strong></strong> {{message}}
+       </div>
+      {% endfor %}
 
       {% endblock body %}
     </main>

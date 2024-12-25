@@ -49,19 +49,37 @@ def signup(request):
     return render(request, "signup.html")
 
 
+# class ActivateAccountView(View):
+#     def get(self,request,uidb64,token):
+#         try:
+#             uid = force_str(urlsafe_base64_decode(uidb64))
+#             user = User.objects.get(pk=uid)
+#         except Exception as identifier:
+#             user = None
+#         if user is not None and generate_token.check_token(user,token):
+#             user.is_active = True
+#             user.save()
+#             messages.success(request, "Account activated successfully")
+#             return redirect('/auth/login')
+#         return redirect(request, 'auth/actiavtefail.html')
+
 class ActivateAccountView(View):
-    def get(self,request,uidb64,token):
+    def get(self, request, uidb64, token):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
             user = User.objects.get(pk=uid)
         except Exception as identifier:
             user = None
-        if user is not None and generate_token.check_token(user,token):
+        
+        if user is not None and generate_token.check_token(user, token):
             user.is_active = True
             user.save()
-            messages.info(request, "Account activated successfully")
+            messages.success(request, "Account activated successfully")
             return redirect('/auth/login')
-        return redirect(request, 'auth/actiavtefail.html')
+        
+        messages.error(request, "Activation link is invalid or has expired.")
+        return render(request, 'authentication/activatefail.html')
+
 
 def handlelogin(request):
     if request.method == "POST":
@@ -71,18 +89,20 @@ def handlelogin(request):
         if myuser is not None:
             login(request, myuser)
             messages.success(request, "Successfully logged in")
-            return redirect(request, '/')
+            return redirect('/')
         else:
             messages.error(request, "Invalid credentials, Please try again")
-            return render(request, "/auth/login")
+            return render(request, 'login.html')
 
-    return render(request, "auth/login.html")
+    return render(request, "login.html")
     
 
 
 
 
 def handlelogout(request):
+    logout(request)
+    messages.info(request, "Successfully logged out")
     return redirect('/auth/login')
     # return render(request, "authentication/signup.html")
 
