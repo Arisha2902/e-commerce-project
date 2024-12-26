@@ -6,6 +6,7 @@ urlpatterns = [
       path('contact',views.contact, name='contact'),
       path('about',views.about, name='about'),
       path('checkout/',views.Checkout, name='Checkout'),
+      path('handlerequest/', views.handlerequest, name='HandleRequest'),
       # path('',views., name='')
 
 

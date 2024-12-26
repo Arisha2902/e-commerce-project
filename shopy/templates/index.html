@@ -78,7 +78,7 @@
 if (localStorage.getItem('cart') == null) {
   var cart = {};
 } else {
-  cart = JSON.parse(localStorage.getItem('cart'));
+   var cart = JSON.parse(localStorage.getItem('cart'));
   updateCart(cart);
 
 }
@@ -181,6 +181,18 @@ $('.divpr').on("click", "button.plus", function() {
   
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 

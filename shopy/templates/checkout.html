@@ -121,52 +121,66 @@ Check Out
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
 
+
+
 <script>
-if (localStorage.getItem('cart') == null) {
-   var cart = {};
-} else {
-   cart = JSON.parse(localStorage.getItem('cart'));
-}
-console.log(cart);
+    if (localStorage.getItem('cart') == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
+    console.log(cart);
 
-var sum = 0;
-var totalPrice = 0;
-if ($.isEmptyObject(cart)) {
-   //if object is empty
-   mystr = `<p>Your cart is empty, please add some items to your cart before checking out!</p>`
-   $('#items').append(mystr);
-} else {
-   for (item in cart) {
-       let name = cart[item][1];
-       let qty = cart[item][0];
-       let itemPrice = cart[item][2];
-       sum = sum + qty;
-       totalPrice = totalPrice + qty* itemPrice;
-       
-       mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
-                   ${name}
-                   <div><b> Price : ${itemPrice}</b></div>
-                   <span class="badge badge-primary badge-pill">${qty}</span>
-               </li>`
-       $('#items').append(mystr);
-   }
-   document.getElementById('totalprice').innerHTML=totalPrice
+    var sum = 0;
+    var totalPrice = 0;
 
-}
-document.getElementById('totalprice').innerHTML = totalPrice;
+    if ($.isEmptyObject(cart)) {
+        // If the cart is empty
+        mystr = `<tr><td colspan="3">Your cart is empty, please add some items to your cart before checking out!</td></tr>`;
+        $('#items').append(mystr);
+    } else {
+        for (item in cart) {
+            let name = cart[item][1];
+            let qty = cart[item][0];
+            let itemPrice = cart[item][2];
 
-$('#itemsJson').val(JSON.stringify(cart));
+            // Check if quantity is zero and remove item from cart
+            if (qty <= 0) {
+                delete cart[item];
+                continue;
+            }
 
+            sum += qty;
+            totalPrice += qty * itemPrice;
 
+            mystr = `<tr>
+                        <td>${name}</td>
+                        <td>${qty}</td>
+                        <td>${qty * itemPrice}</td>
+                    </tr>`;
+            $('#items').append(mystr);
+        }
 
-// {% if thank %}
-// alert('Thanks for ordering with us. Your order is is {{id}}. Use it to track your order using our order tracker');
-// localStorage.clear();
-// document.location = "/";
-// {% endif %}
+        if ($.isEmptyObject(cart)) {
+            mystr = `<tr><td colspan="3">Your cart is empty, please add some items to your cart before checking out!</td></tr>`;
+            $('#items').append(mystr);
+        }
 
-// var test = `${totalPrice}`;
-// document.getElementById("amt").value = test;
-</script>
+        document.getElementById('totalprice').innerHTML = totalPrice;
+    }
+
+    document.getElementById('totalprice').innerHTML = totalPrice;
+
+    $('#itemsJson').val(JSON.stringify(cart));
+
+    // {% if thank %}
+    // alert('Thanks for ordering with us. Your order is {{id}}. Use it to track your order using our order tracker');
+    // localStorage.clear();
+    // document.location = "/";
+    // {% endif %}
+
+    var test = `${totalPrice}`;
+    document.getElementById("amt").value = test;
+    </script>
 
 {% endblock body %}
