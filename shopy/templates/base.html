@@ -50,9 +50,14 @@
           <li><a class="nav-link scrollto " href="/about">About</a></li>
           <li><a class="nav-link scrollto " href="/checkout"></a>Checkout</li>
           <li><a class="nav-link scrollto " href="/about">My Profile</a></li>
-          <button type="button" class="btn btn-lg btn-danger p-3 m-2" id="popcart" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?" data-placement="bottom">
+          <!-- <button type="button" class="btn btn-lg btn-danger p-3 m-2" id="popcart" data-bs-toggle="popover" data-bs-title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?" data-placement="bottom">
             Cart (<span id="cart">0</span>)
+          </button> -->
+
+          <button type="button" class="nav-link scrollto bg-danger p-3 m-2 text-white" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" ><i class="fa-solid fa-cart-shopping"></i>  Cart (<span id="cart">0</span>)
           </button>
+
+
 
           {% if request.user.is_authenticated %}
           <li><a class="nav-link scrollto" href="/auth/logout/"> Logout 
