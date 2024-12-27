@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse,redirect
-from app.models import Contact, Product, Order, OrderUpdate
+from app.models import Contact, product, Order, OrderUpdate
 from django.contrib import messages
 from math import ceil
 from app import keys
@@ -11,16 +11,44 @@ from paytm import Checksum
 # Create your views here.
 def index(request):
     allProds = []
-    catprods = Product.objects.values('category', 'Product_id')
+    catprods = product.objects.values('category', 'product_id')
     print(catprods)
     cats = {item['category'] for item in catprods}
     for cat in cats:
-        prod = Product.objects.filter(category=cat)
+        prod = product.objects.filter(category=cat)
         n = len(prod)
         nSlides = n // 4 + ceil((n / 4) - (n // 4))
         allProds.append([prod, range(1, nSlides), nSlides])
     params = {'allProds': allProds}
     return render(request, "index.html", params)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    # allProds = []
+    # catprods = Product.objects.values('category','Product_id')
+    # print(catprods)
+    # cats = {item['category'] for item in catprods}
+    # for cat in cats:
+    #     prod= Product.objects.filter(category=cat)
+    #     n=len(prod)
+    #     nSlides = n // 4 + ceil((n / 4) - (n // 4))
+    #     allProds.append([prod, range(1, nSlides), nSlides])
+
+    # params= {'allProds':allProds}
+
+    # return render(request,"index.html",params)
 
 def contact(request):
     if request.method == "POST":

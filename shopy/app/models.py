@@ -13,8 +13,8 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
     
-class Product(models.Model):
-    Product_id = models.AutoField(primary_key=True)
+class product(models.Model):
+    product_id = models.AutoField(primary_key=True)
     product_name = models.CharField(max_length=100)
     category = models.CharField(max_length=50)
     subcategory = models.CharField(max_length=50)

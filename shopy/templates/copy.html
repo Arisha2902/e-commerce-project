@@ -1,172 +1,249 @@
 {% extends 'base.html' %}
-{% block title %}
-Check Out
-{% endblock title %} 
+{% block title %} Home {% endblock title %}
 {% block content %}
 
-<h1>Welcome to Dhamaka Sale</h1>
+<h1 style="color: #ffffff;">Step in! <i> Welcome to Dhamaaka Sale</i></h1>
+{% endblock content %}
 
-{% endblock content %} 
-{% block body %} 
+{% block body %}
 {% load static %}
 
-<!-- ======= Portfolio Section ======= -->
-<section id="portfolio" class="portfolio">
+<section id="portfolio" class="portfolio section">
+
+    <!-- Section Title -->
+  <div class="container section-title" data-aos="fade-up">
+      {% for message in messages %}
+      <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong> {{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      
+      </div>
+     {% endfor %}
+    <div class="container section-title" data-aos="fade-up">
+      <h2>Welcome to Shopy</h2>
+      <p><span>Check Our</span> <span class="description-title">Product</span></p>
+    </div><!-- End Section Title -->
+
+  {% for Product,range, nSlides in allProds %}
+    <h3 class="my-3 text-center text-success bg-light" >{{ Product.0.category }} Flashsale</h3>
   <div class="container">
-    {% for message in messages %}
+    <div class="row">
 
-    <div
-      class="alert alert-{{message.tags}} alert-dismissible fade show"
-      role="alert"
-    >
-      <strong>{{message}}</strong>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="alert"
-        aria-label="Close"
-      ></button>
+    {% for i in Product %}
+      <div class="col-md-3 mt-3">
+        <img src="/media/{{i.image}}" class="card-img-top"  alt="not found" height="200px" width="150px" >
+        <div class="card-body">
+          <h5 class="card-title mt-2" id="namepr{{i.id}}" >{{ i.product_name }}</h5>
+          <p class="card-text">{{ i.desc|slice:"0.53"}}....</p>
+          <h6 class="card-title mb-3">
+            Price: <span id="pricepr{{i.id}}">{{ i.price }}</span>
+          </h6>
+          <span id="divpr{{i.id}}" class="divpr">
+            <button id="pr{{i.id}}" class="btn btn-danger cart btn-sm mt-0">
+              Add To Cart <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+          </span>
+          <a href="/media/{{i.image}}">
+            <button class="btn btn-dark btn-sm cart">view</button>
+          </a>
+        </div>
+      </div>
+    {% endfor %} 
+  
+
+
+    
+     </div>
     </div>
-    {% endfor %}
+  {% endfor %}
+    
+  </div>
+</section>
 
-    <div class="section-title">
-      <h2>Welcome to Shop</h2>
-      <h3>Checkout Page </h3>
-    </div>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script> -->
 
-       
-       
-       <div class="container">
-           <div class="col my-4">
-               <h2>Step 1 - My Awesome Cart Express Checkout - Review Your Cart Items</h2>
-               <div class="my-4">
-                   <ul class="list-group" id="items">
-                   </ul>
-       
-                   <nav aria-label="breadcrumb">
-         <ol class="breadcrumb mt-3">
-           <li class="breadcrumb-item active" aria-current="page">Your Cart Total Is <b>Rs. <span id="totalprice"></span> <span id="amount"></span></b>. 
-            Enter your details below & place your order. Thanks for using Shopping Cart</li>
-           <li</li>
-         </ol>
-       </nav>
-       
-       
-       
-                   
-               </div>
-           </div>
-           <div class="col my-4">
-               <h2>Step 2 - Enter Address & Other Details:</h2>
-               <form method="post" action="/checkout/">{% csrf_token %}
-                   <input type="hidden" name="itemsJson" id="itemsJson">
-                
-                   <input type="hidden" id="amt" name="amt">
-                   <div class="form-row">
-                       <div class="form-group col-md-6">
-                           <label for="inputname">Name</label>
-                           <input type="text" class="form-control mt-3" id="name" name="name" placeholder="Name" required>
-                       </div>
-                       <div class="form-group col-md-6">
-                           <label for="inputEmail4">Email</label>
-                           <input type="email" class="form-control mt-3" id="email" name="email" placeholder="Email" value="{{user.email}}" required>
-                       </div>
-                    
-                   </div>
-                    <div class="form-row">
-                   <div class="form-group col-md-6">
-                       <label for="inputAddress">Address</label>
-                       <input type="text" class="form-control mt-3" id="address1" name="address1" placeholder="1234 Main St" required>
-                   </div>
-                   <div class="form-group col-md-6">
-                       <label for="inputAddress">Address line 2</label>
-                       <input type="text" class="form-control mt-3" id="address2" name="address2" placeholder="1234 Main St" required>
-                   </div>
-                   </div>
-       
-                 
-                 
-                   <div class="form-row">
-                       <div class="form-group col-md-6">
-                           <label for="inputCity">City</label>
-                           <input type="text" class="form-control mt-3" id="city" name="city" required>
-                       </div>
-                       <div class="form-group col-md-6">
-                           <label for="inputState">State</label>
-                           <input type="text" class="form-control mt-3" id="state" name="state"  placeholder="Enter State" required>
-                       </div>
-                       </div>
-                     
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
-                           <label for="inputZip">Pin Code</label>
-                           <input type="number" class="form-control mt-3" id="zip_code" name="zip_code" required>
-                       </div>
-                   <div class="form-group col-md-6">
-                       <label for="inputZip">Phone Number</label>
-                       <input type="number" class="form-control mt-3" id="phone" name="phone" required>
-                   </div>
-                   <br>
-               
-                   
-                   <button id="btn" type="submit" class="btn btn-success btn-sm btn-block col-md-4">Place Order</button>
-               </form>
-           </div>
-       </div>
-   
- <script src="https://code.jquery.com/jquery-3.3.1.js"
- integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
- crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  
 
 
 <script>
+
+  
+
+
+
+
+
 if (localStorage.getItem('cart') == null) {
-   var cart = {};
+  var cart = {};
 } else {
-   cart = JSON.parse(localStorage.getItem('cart'));
-}
-console.log(cart);
-
-var sum = 0;
-var totalPrice = 0;
-if ($.isEmptyObject(cart)) {
-   //if object is empty
-   mystr = `<p>Your cart is empty, please add some items to your cart before checking out!</p>`
-   $('#items').append(mystr);
-} else {
-   for (item in cart) {
-       let name = cart[item][1];
-       let qty = cart[item][0];
-       let itemPrice = cart[item][2];
-       sum = sum + qty;
-       totalPrice = totalPrice + qty* itemPrice;
-       
-       mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
-                   ${name}
-                   <div><b> Price : ${itemPrice}</b></div>
-                   <span class="badge badge-primary badge-pill">${qty}</span>
-               </li>`
-       $('#items').append(mystr);
-   }
-   document.getElementById('totalprice').innerHTML=totalPrice
+   var cart = JSON.parse(localStorage.getItem('cart'));
+  updateCart(cart);
 
 }
-document.getElementById('totalprice').innerHTML = totalPrice;
+// add or increment code
 
-$('#itemsJson').val(JSON.stringify(cart));
+// $('.cart').click(function() {
+$('.divpr').on('click', 'button.cart', function() {
+  var idstr = this.id.toString();
+  console.log(idstr)
+
+  if (cart[idstr] != undefined) {
+      qty = cart[idstr][0] + 1;
+
+  } else {
+      qty = 1;
+      name = document.getElementById('name' + idstr).innerHTML;
+      price = document.getElementById('price' + idstr).innerHTML;
+      cart[idstr] = [qty, name, price];
+      
+  }
+  updateCart(cart);
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+  document.getElementById('cart').innerHTML = Object.keys(cart).length;
+  console.log( Object.keys(cart).length)
+  document.getElementById("popcart").click();
+});
+// add pop over to cart
+
+$('#popcart').popover();
+
+updatePopover(cart);
+function updatePopover(cart) {
+
+  
+  console.log('we are  inside update popover');
+  
+  var popStr = "";
+  var popStr = popStr + "<h5> cart for your items in my shopping cart </h5> <div class='mx-2 my-2'>";
+  var i = 1;
+  for (var item in cart) {
+      popStr = popStr + "<b>" + i + "</b>. ";
+      popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "..." + "<b>" +cart[item][0] + "</b>"+ "Qty"  + '<br>';
+      i = i + 1;
+  }
+
+  popStr = popStr + "</div> <a href='/checkout'><button class='btn btn-success' id='clearCart'>Checkout</button></a>  <button class='btn btn-dark' onclick='clearCart()' id='clearCart'>ClearCart</button>"
+  document.getElementById('popcart').setAttribute('data-content', popStr);
+  $('#popcart').popover('show');
+  document.getElementById("popcart").click();
+}
+
+function clearCart() {
+  cart = JSON.parse(localStorage.getItem('cart'));
+  for (var item in cart) {
+      document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-danger cart">AddtoCard <i class="fa-solid fa-cart-shopping"></i></button>'
+  }
+  localStorage.clear();
+  cart = {};
+  updateCart(cart);
+  
+ let clear= document.getElementById("popcart").click();
+ document.getElementById("popcart").click();
+
+}
+
+// function updateCart(cart) {
+//   var sum = 0;
+//   for (var item in cart) {
+//       sum = sum + cart[item][0];
+//       document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "'class='btn btn-success minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-success plus'> + </button>";
+//   }
+//   localStorage.setItem('cart', JSON.stringify(cart));
+//   document.getElementById('cart').innerHTML = sum;
+//   console.log(cart);
+//   updatePopover(cart);
+//   document.getElementById("popcart").click();
+// }
+
+// //if plus or minus button is clicked change the cart as well as the display value
+// $('.divpr').on("click", "button.minus", function() {
+
+//   a = this.id.slice(7, );
+//   cart['pr' + a][0] = cart['pr' + a][0] - 1;
+//   cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+//   document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+//   updateCart(cart);
+  
+
+// })
+
+
+// $('.divpr').on("click", "button.plus", function() {
+
+//   a = this.id.slice(6, );
+//   cart['pr' + a][0] = cart['pr' + a][0] + 1;
+
+//   document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+//   updateCart(cart);
+  
+
+// })
 
 
 
-// {% if thank %}
-// alert('Thanks for ordering with us. Your order is is {{id}}. Use it to track your order using our order tracker');
-// localStorage.clear();
-// document.location = "/";
-// {% endif %}
 
-// var test = `${totalPrice}`;
-// document.getElementById("amt").value = test;
+
+
+
+
+
+
+
+
+function updateCart(cart) {
+      var sum = 0;
+      for (var item in cart) {
+          sum = sum + cart[item][0];
+          document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "'class='btn btn-success minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-success plus'> + </button>";
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      document.getElementById('cart').innerHTML = sum;
+      console.log(cart);
+      updatePopover(cart);
+      document.getElementById("popcart").click();
+  }
+
+  //if plus or minus button is clicked change the cart as well as the display value
+  $('.divpr').on("click", "button.minus", function() {
+
+      a = this.id.slice(7, );
+      cart['pr' + a][0] = cart['pr' + a][0] - 1;
+      cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+      document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+      updateCart(cart);
+      
+
+  })
+
+
+  $('.divpr').on("click", "button.plus", function() {
+
+      a = this.id.slice(6, );
+      cart['pr' + a][0] = cart['pr' + a][0] + 1;
+
+      document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+      updateCart(cart);
+      
+
+  })
+
+
+
+
+
+
+
+
+
+
 </script>
+
 
 {% endblock body %}
