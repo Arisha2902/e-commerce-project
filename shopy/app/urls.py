@@ -5,7 +5,7 @@ urlpatterns = [
       path('',views.index, name='index'),
       path('contact',views.contact, name='contact'),
       path('about',views.about, name='about'),
-      path('checkout/',views.Checkout, name='Checkout'),
+      path('checkout/',views.Checkout, name='checkout'),
       path('handlerequest/', views.handlerequest, name='HandleRequest'),
       # path('',views., name='')
 
