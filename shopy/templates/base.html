@@ -5,6 +5,13 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <script>
+     window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
+  </script>
   <title>
     {% block title %}    {% endblock title %}
 
@@ -46,10 +53,14 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a class="nav-link scrollto active" href="/" class="active">Home</a></li>
-          <li><a class="nav-link scrollto " href="/blog">Blog</a></li>
           <li><a class="nav-link scrollto " href="/about">About</a></li>
           <li><a class="nav-link scrollto " href="/about">Orders</a></li>
+          <li><a class="nav-link scrollto " href="/blog">Checkout</a></li>
+
           <li><a class="nav-link scrollto " href="/about">My Profile</a></li>
+          <button type="button" class="nav-link scrollto bg-danger p-3 m-2 text-white" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" ><i class="fa-solid fa-cart-shopping"></i>  Cart (<span id="cart">0</span>)
+          </button>
+
           
           {% if request.user.is_authenticated %}
           <li><a class="nav-link scrollto" href="/auth/logout/"> Logout 
@@ -67,7 +78,6 @@
           </li>
           {% endif %}
 
-          <li><a class="nav-link scrollto bg-dark p-3 m-2" href="#contact">Cart</a></li>
           <li><a class="nav-link scrollto bg-success p-3 m-2 " href="#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
