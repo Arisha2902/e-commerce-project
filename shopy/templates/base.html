@@ -64,7 +64,7 @@
           
           {% if request.user.is_authenticated %}
           <li><a class="nav-link scrollto" href="/auth/logout/"> Logout 
-            <!-- {{ user.username }} -->
+            {{ user.username }}
           </a></li>
           {% else %}
                  
@@ -78,7 +78,7 @@
           </li>
           {% endif %}
 
-          <li><a class="nav-link scrollto bg-success p-3 m-2 " href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto bg-success p-3 m-2 " href="/contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
