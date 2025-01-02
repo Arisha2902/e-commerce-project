@@ -54,18 +54,18 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a class="nav-link scrollto active" href="/" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li><a class="nav-link scrollto active" href="/" class="active"><i class="fa-solid fa-house"></i>&nbsp; Home</a></li>
           <!-- <li><a class="nav-link scrollto " href="/about">About</a></li> -->
           <!-- <li><a class="nav-link scrollto " href="/about">Orders</a></li> -->
-          <li><a class="nav-link scrollto " href="/checkout"><i class="fa-solid fa-bag-shopping"></i> Checkout</a></li>
+          <li><a class="nav-link scrollto " href="/checkout"><i class="fa-solid fa-bag-shopping"></i> &nbsp; Checkout</a></li>
 
-          <li><a class="nav-link scrollto " href="/profile"><i class="fa-solid fa-address-card"></i> My Profile</a></li>
+          <li><a class="nav-link scrollto " href="/profile"><i class="fa-solid fa-address-card"></i>&nbsp; My Profile</a></li>
           <button type="button" class="nav-link scrollto bg-danger p-3 m-2 text-white" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" ><i class="fa-solid fa-cart-shopping"></i> Cart (<span id="cart">0</span>)
           </button>
 
           
           {% if request.user.is_authenticated %}
-          <li><a class="nav-link scrollto" href="/auth/logout/">Logout <i class="fa-solid fa-right-from-bracket"></i></a></li>
+          <li><a class="nav-link scrollto" href="/auth/logout/"> &nbsp;Logout <i class="fa-solid fa-right-from-bracket"></i></a></li>
 
           <!-- <li><a class="nav-link scrollto" href="/auth/logout/"><i class="fa-solid fa-left-from-bracket"></i> Logout <i class="fa-solid fa-left-from-bracket"></i> -->
             <!-- {{ user.username }} -->
@@ -74,7 +74,7 @@
                  
           <li class="dropdown"><a href="#"><span><i class="fa-solid fa-user">
             
-          </i>Sigin</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          </i>&nbsp;Sigin</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="/auth/signup/">  <i class="fa-sharp fa-solid fa-right-to-bracket"></i>Sign Up</a></li>
               <li><a href="/auth/login/"> <i class="fa-solid fa-right-to-bracket"></i>Login</a></li>
@@ -84,7 +84,7 @@
           </li>
           {% endif %}
 
-          <li><a class="nav-link scrollto bg-success p-3 m-2 " href="/contact"><i class="fa-solid fa-address-book"></i>Contact</a></li>
+          <li><a class="nav-link scrollto bg-success p-3 m-2 " href="/contact"><i class="fa-solid fa-address-book"></i>&nbsp;Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -96,7 +96,8 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
-      <img src="{% static '/assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in">
+      <!-- <img src="{% static '/assets/img/hero-bg.jpg' %}" alt="" data-aos="fade-in"> -->
+      <img src="{% static 'images/bg.jpg' %}" alt="" >
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
          {% block content %}
          

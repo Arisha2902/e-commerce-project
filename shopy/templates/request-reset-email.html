@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} SignUp {% endblock title %}
+{% block title %} Request reset email{% endblock title %}
 {% block content %}
 
 <div class="card p-3" style="background-color: rgb(0 0 0 / 33%) !important;  justify-self: center; width: 65vh;">
@@ -14,25 +14,23 @@
 {% endfor %}
 
 <!-- <div class="card p-3" style="background-color: rgb(0 0 0 / 33%) !important;  justify-self: center; width: 65vh;"> -->
-  <h1  style="color: white;">Login</h1>
-  <form action="/auth/login/" method="post" style="color: aliceblue;">{% csrf_token %}
+  <h1  style="color: white;">Request a  Reset Link</h1>
+  <form action="/auth/request-reset-email/" method="post" style="color: aliceblue;">{% csrf_token %}
     <br>
     
     <label for="Email">Email</label>
     <div class="form-group">
       <input type="email" class="form-control" id="email" name="email" required>
     </div>
-    <label for="pass1">Password</label>
+    <!-- <label for="pass1">Password</label>
     <div class="form-group">
       <input type="password" class="form-control" name="pass1" id="pass1" required>
-    </div>
+    </div> -->
     
     <br>
-    <button type="submit" class="btn bg-success" style="color:white;">Login</button>
+    <button type="submit" class="btn bg-dark" style="color:white;">Reset</button>
     <br>
-    <span>Forget Password ?<a href="/auth/request-reset-email/"> Reset </a></span>
-    <br>
-    New User? <a href="/auth/signup/">SignUp</a>
+    New User? <a href="/">Go Back</a>
     
     </form>
 </div>
