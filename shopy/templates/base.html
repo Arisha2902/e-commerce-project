@@ -32,6 +32,8 @@
   <link href="{% static '/assets/vendor/aos/aos.css' %}" rel="stylesheet">
   <link href="{% static '/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
   <link href="{% static '/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
 
   <!-- Main CSS File -->
   <link href=" {% static '/assets/css/main.css' %}" rel="stylesheet">
@@ -43,7 +45,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="{% static 'images/logo.png' %}" alt="">
         <h1 style="color: red;">Shopy</h1>
@@ -52,33 +54,37 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a class="nav-link scrollto active" href="/" class="active">Home</a></li>
-          <li><a class="nav-link scrollto " href="/about">About</a></li>
+          <li><a class="nav-link scrollto active" href="/" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
+          <!-- <li><a class="nav-link scrollto " href="/about">About</a></li> -->
           <!-- <li><a class="nav-link scrollto " href="/about">Orders</a></li> -->
-          <li><a class="nav-link scrollto " href="/checkout">Checkout</a></li>
+          <li><a class="nav-link scrollto " href="/checkout"><i class="fa-solid fa-bag-shopping"></i> Checkout</a></li>
 
-          <li><a class="nav-link scrollto " href="/profile">My Profile</a></li>
-          <button type="button" class="nav-link scrollto bg-danger p-3 m-2 text-white" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" ><i class="fa-solid fa-cart-shopping"></i>  Cart (<span id="cart">0</span>)
+          <li><a class="nav-link scrollto " href="/profile"><i class="fa-solid fa-address-card"></i> My Profile</a></li>
+          <button type="button" class="nav-link scrollto bg-danger p-3 m-2 text-white" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" ><i class="fa-solid fa-cart-shopping"></i> Cart (<span id="cart">0</span>)
           </button>
 
           
           {% if request.user.is_authenticated %}
-          <li><a class="nav-link scrollto" href="/auth/logout/"> Logout 
+          <li><a class="nav-link scrollto" href="/auth/logout/">Logout <i class="fa-solid fa-right-from-bracket"></i></a></li>
+
+          <!-- <li><a class="nav-link scrollto" href="/auth/logout/"><i class="fa-solid fa-left-from-bracket"></i> Logout <i class="fa-solid fa-left-from-bracket"></i> -->
             <!-- {{ user.username }} -->
           </a></li>
           {% else %}
                  
-          <li class="dropdown"><a href="#"><span>Sigin</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="#"><span><i class="fa-solid fa-user">
+            
+          </i>Sigin</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="/auth/signup/"> Sign Up</a></li>
-              <li><a href="/auth/login/"> Login</a></li>
-              <li><a href="/auth/logout/"> Logout </a></li>
+              <li><a href="/auth/signup/">  <i class="fa-sharp fa-solid fa-right-to-bracket"></i>Sign Up</a></li>
+              <li><a href="/auth/login/"> <i class="fa-solid fa-right-to-bracket"></i>Login</a></li>
+              <li><a href="/auth/logout/"><i class="fa-solid fa-right-from-bracket"></i> Logout </a></li>
              
             </ul>
           </li>
           {% endif %}
 
-          <li><a class="nav-link scrollto bg-success p-3 m-2 " href="/contact">Contact</a></li>
+          <li><a class="nav-link scrollto bg-success p-3 m-2 " href="/contact"><i class="fa-solid fa-address-book"></i>Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
