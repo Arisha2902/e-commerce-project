@@ -130,6 +130,17 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 import os
 
+DEBUG = os.getenv("DEBUG", "False") == "True"
+VERCEL_URL = os.getenv("VERCEL_URL", "your-vercel-url.vercel.app")
+
+ALLOWED_HOSTS = [
+    VERCEL_URL,
+    ".vercel.app",
+    "localhost",
+    "127.0.0.1"
+]
+
+
 STATIC_URL = 'static/'
 
 
