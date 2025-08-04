@@ -130,16 +130,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 import os
 
-DEBUG = os.getenv("DEBUG", "False") == "True"
-VERCEL_URL = os.getenv("VERCEL_URL", "your-vercel-url.vercel.app")
-
-ALLOWED_HOSTS = [
-    VERCEL_URL,
-    ".vercel.app",
-    "localhost",
-    "127.0.0.1"
-]
-
 
 STATIC_URL = 'static/'
 
@@ -148,7 +138,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
