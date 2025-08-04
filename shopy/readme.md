@@ -41,9 +41,9 @@ Follow these steps to set up the project locally:
    cd ecommerce-website# Django eCommerce Website```
 
    
-To run server:-
->>cd shopy
->>python manage.py runserver
+## To run server:-
+- cd shopy
+- python manage.py runserver
 
 Welcome to the Django eCommerce Website! This project is a fully functional online store built using Django, providing a seamless shopping experience for users.
 
