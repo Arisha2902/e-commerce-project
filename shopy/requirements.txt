@@ -1,0 +1,46 @@
+# Core Django Framework
+Django==5.1.3
+
+# Image handling for product images
+Pillow>=10.0.0
+
+# Email support for SMTP
+django-smtp-ssl>=1.0
+
+# Database (SQLite is built-in with Django)
+# No additional package needed for SQLite
+
+# Static file serving (for development)
+whitenoise>=6.6.0
+
+# Environment variables support (optional but recommended)
+python-decouple>=3.8
+
+# Additional utilities
+six>=1.16.0  # Required by PayTm integration
+
+# Development dependencies (optional)
+django-debug-toolbar>=4.2.0
+
+# Production server (optional)
+gunicorn>=21.2.0
+
+# Security and authentication
+django-extensions>=3.2.3
+
+# Form handling and validation
+django-crispy-forms>=2.1
+crispy-bootstrap5>=0.7
+
+# Payment integration dependencies
+requests>=2.31.0
+urllib3>=2.0.7
+
+# Template utilities
+django-widget-tweaks>=1.5.0
+
+# CORS headers for API access (if needed)
+django-cors-headers>=4.3.1
+
+# Additional utilities for email and templates
+django-email-verification>=0.3.0
