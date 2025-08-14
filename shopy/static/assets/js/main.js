@@ -46,6 +46,7 @@
 
   });
 
+
   /**
    * Toggle mobile nav dropdowns
    */
@@ -211,3 +212,36 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+
+
+  let watsonInstance = null;
+
+  window.watsonAssistantChatOptions = {
+    integrationID: "dfad74c2-81da-45f8-8fc5-ea9c16e9cc61", // Updated Integration ID
+    region: "eu-de",
+    serviceInstanceID: "40a8a1e6-a4ed-479c-b2cc-48f8ec48dbb6",
+    onLoad: async function(instance) {
+      watsonInstance = instance;
+      await instance.render(); // shows floating chat icon
+    }
+  };
+
+  setTimeout(function() {
+    const t = document.createElement("script");
+    t.src = "https://web-chat.global.assistant.watson.appdomain.cloud/versions/" +
+             (window.watsonAssistantChatOptions.clientVersion || "latest") +
+             "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const chatBtn = document.getElementById("chatButton");
+    if (chatBtn) {
+      chatBtn.addEventListener("click", function() {
+        if (watsonInstance) {
+          watsonInstance.openWindow(); // manual trigger
+        }
+      });
+    }
+  });
