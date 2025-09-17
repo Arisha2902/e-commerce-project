@@ -50,7 +50,7 @@ def about(request):
 def checkout(request):
     if not request.user.is_authenticated:
         messages.warning(request,"Login & Try Again")
-        return render(request, '/auth/login')
+        return redirect('/auth/login')
     if request.method=="POST":
         items_json = request.POST.get('itemsJson', '')
         name = request.POST.get('name', '')
@@ -157,5 +157,7 @@ def profile(request):
     # print(currentuser)
     return render(request,"profile.html",context)
     # return render(request, "profile.html")
+
+
 
 
